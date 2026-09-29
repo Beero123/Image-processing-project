@@ -3,7 +3,10 @@
 using namespace std;
 int main()
 {
-    Image image("image.jpg");
+    string filename;
+    cout<< "Enter the filename:";
+    cin>> filename;
+    Image image(filename);
 
     for (int i = 0; i < image.width; i++)
     {
