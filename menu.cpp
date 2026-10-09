@@ -153,9 +153,10 @@ void load_image(string& filename, Image& image) {
 // This function is used to save an image
 
 void image_save(string& filename, Image& image) {
+
     cout << "Pls enter image name to store new image\n";
-    cout << "and specify extension .jpg, .bmp, .png, .tga: ";
-    getline(cin>>ws, filename);
+    getline(cin >> ws, filename);
+    
     image.saveImage(filename);
 
     cout << "Your image has been saved successfully.\n";
