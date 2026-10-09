@@ -49,6 +49,9 @@ int main() {
     getline(cin, filename);
     Image image(filename);
 
+    Image old_image;
+    old_image = image;
+
     bool cont_editing = true;
     int choice;
 
@@ -161,6 +164,14 @@ void image_save(string& filename, Image& image) {
 
     cout << "Your image has been saved successfully.\n";
 }
+
+// This function removes the latest filter the user has applied from the picture
+
+void unapply_filter (Image& image, Image old_image){
+        image = old_image;
+        cout << "your latest filter has been removed successfully";
+
+    }
 
 
 // This fucntion is used to exit the program
