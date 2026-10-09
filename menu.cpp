@@ -38,7 +38,8 @@ void cropImage(Image& image);
 void Apply_TV_Effect(string& filename, Image& image);
 void Infrared_filter(Image& image);
 void purpleTint(Image& image);
-
+void merge_image(Image& image1,Image& image2);
+void Sunlight(Image& image);
 
 
 
@@ -66,6 +67,8 @@ int main() {
             << " 12- Apply Infrared filter\n"
             << " 14_ Apply_TV_Effect\n"
             << " 15_ apply purple-tint\n"
+            << " 16_ apply Merge images\n"
+            << " 17_ apply Sunlight\n"
             << " 19- Save the image\n"
             << " 20- Exit\n";
 
@@ -98,7 +101,7 @@ int main() {
         case 8:
             resize_image(filename, image);
             break;
-        case 10:
+        case :
             Detect_Image_edges(filename, image);
             break;
         case 11:
@@ -113,6 +116,12 @@ int main() {
         case 15:
             purpleTint(image);
    break;
+        case 16 :
+            merge images (image);
+    break; 
+        case 17 :
+            Sunlight(Image& image)
+    break;
         case 19:
             image_save(filename, image);
             break;
@@ -551,6 +560,140 @@ void Infrared_filter(Image& image) {
 
     }
     cout << "Your Infrared filter got applied.\n";
+    
+    // This function is used to apply fliter 9, Merge images
+    
+    void merge_image(Image& image1, Image& image2))
+    int width1 = image1.width;
+    int height1 = image1.height;
+    int width2 = image2.width;
+    int height2 = image2.height;
+    // If the two images have the same size
+    if (width1 == width2 && height1 == height2)
+    {
+        Image mergedImage(width1, height1);
+        for (int i = 0; i < height1; i++)
+        {
+            for (int j = 0; j < width1; j++)
+            {
+                for (int k = 0; k < image1.channels; k++)
+                {
+                    mergedImage(j, i, k) =
+                        (image1(j, i, k) + image2(j, i, k)) / 2;
+                }
+            }
+        }
+        mergedImage.save("merged_image.jpg");
+    }
+    // If the images have different sizes
+    else
+    {
+        cout << "Images have different sizes." << endl;
+        cout << "1 - Resize both images to the same size" << endl;
+        cout << "2 - Merge the common area" << endl;
+        int option;
+        cin >> option;
+        // Option 1: Resize
+        if (option == 1)
+        {
+            int newWidth = max(width1, width2);
+            int newHeight = max(height1, height2);
+            Image resizedImage1(newWidth, newHeight);
+            Image resizedImage2(newWidth, newHeight);
+            // Resize image 1
+            for (int i = 0; i < newHeight; i++)
+            {
+                for (int j = 0; j < newWidth; j++)
+                {
+                    for (int k = 0; k < image1.channels; k++)
+                    {
+                        int x = j * width1 / newWidth;
+                        int y = i * height1 / newHeight;
+                        resizedImage1(j, i, k) =
+                            image1(x, y, k);
+                    }
+                }
+            }
+            // Resize image 2
+            for (int i = 0; i < newHeight; i++)
+            {
+                for (int j = 0; j < newWidth; j++)
+                {
+                    for (int k = 0; k < image2.channels; k++)
+                    {
+                        int x = j * width2 / newWidth;
+                        int y = i * height2 / newHeight;
+                        resizedImage2(j, i, k) =
+                            image2(x, y, k);
+                    }
+                }
+            }
+            // Merge the two resized images
+            Image mergedImage(newWidth, newHeight);
+            for (int i = 0; i < newHeight; i++)
+            {
+                for (int j = 0; j < newWidth; j++)
+                {
+                    for (int k = 0; k < image1.channels; k++)
+                    {
+                        mergedImage(j, i, k) =
+                            (resizedImage1(j, i, k) +
+                             resizedImage2(j, i, k)) / 2;
+                    }
+                }
+            }
+            mergedImage.save("merged_image.jpg");
+        }
+        // Option 2: Common area
+        else if (option == 2)
+        {
+            int commonWidth = min(width1, width2);
+            int commonHeight = min(height1, height2);
+            Image mergedImage(commonWidth, commonHeight);
+            for (int i = 0; i < commonHeight; i++)
+            {
+                for (int j = 0; j < commonWidth; j++)
+                {
+                    for (int k = 0; k < image1.channels; k++)
+                    {
+                        mergedImage(j, i, k) =
+                            (image1(j, i, k) +
+                             image2(j, i, k)) / 2;
+                    }
+                }
+            }
+        }
+        
+        }
+    
+    cout << "Images  got merged successfully".\n;
+
+    // This function is used to apply sunlight filter
+    
+    void Sunlight(Image& image);
+    for (int i = 0; i < image.height; i++) {
+        for (int j = 0; j < image.width; j++) {
+            int red = image(j, i, 0)+50;
+            if (red > 255) {
+                red = 255;
+            }
+            image(j, i, 0) = red;
+            int green = image(j, i, 1)+40;
+            if (green > 255) {
+                green = 255;
+            }
+            image(j, i, 1) = green;
+            int blue = image(j, i, 2)-20;
+            if (blue < 0) {
+                blue = 0;
+            }
+        
+            image(j, i, 2) = blue;
+      cout << " Sunlight filter got applied".\n;
+        }
+    }
+    
+    
 }
 
 
