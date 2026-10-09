@@ -170,7 +170,6 @@ int main() {
 
     void load_image(string & filename, Image & image) {
         cout << "Please upload the image you would like to edit: ";
-        cin.ignore();
         getline(cin, filename);
         image.loadNewImage(filename);
         cout << "your image has been loaded successfully\n";
