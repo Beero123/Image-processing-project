@@ -15,14 +15,12 @@
 #include <cmath>
 #include <string>
 #include "Image_Class.h"
+#include <limits>
 using namespace std;
+void saveUndoImage(Image& image) {
+	image.saveImage("undo_temp.png");
 
-int clampColor(float value) {
-    if (value < 0.0) return 0;
-    if (value > 255.0) return 255;
-    return static_cast<int>(value);
 }
-
 void load_image(string& filename, Image& image);
 void image_save(string& filename, Image& image);
 void exit_editing();
@@ -42,104 +40,133 @@ void merge_image(Image& image1,Image& image2);
 void Sunlight(Image& image);
 void unapply_filter(Image& image, Image& old_image);
 
-
-
 int main() {
     string filename;
-    cout << "Please upload the image you would like to edit: ";
-    getline(cin, filename);
-    Image image(filename);
-
-    Image old_image;
-    old_image = image;
-
+    Image image;
+    load_image(filename, image);
+	bool canUndo = false;
+	int mainChoice;
+	int filterChoice;
     bool cont_editing = true;
-    int choice;
+	while (cont_editing) {
+		cout << "\n========== MAIN MENU ==========\n" ;
+		cout << "1- Apply Filter\n";
+		cout << "2- Upload a new image\n";
+		cout << "3- Save the current image\n";
+		cout << "4- Undo the last filter applied\n";
+		cout << "5- Exit\n";
+		cout << "Enter your choice: ";
+		cin >> mainChoice;
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		switch (mainChoice) {
+			case 1:
+				cout << "\n========== FILTERS MENU ==========\n";
+				cout << "1- Grayscale\n";
+				cout << "2- Black and White\n";
+				cout << "3- Invert Image\n";
+				cout << "5- Flip Image\n";
+				cout << "6- Rotate Image\n";
+				cout << "7- Adjust Brightness\n";
+				cout << "8- Resize Image\n";
+				cout << "10- Detect Edges\n";
+				cout << "11- Crop Image\n";
+				cout << "12- Infrared Filter\n";
+				cout << "14- TV Effect Filter\n";
+				cout << "15_ Purple Tint Filter\n";
+				cout << "16- Merge Images\n";
+				cout << "17- Sunlight Effect Filter\n";
+				cout << "choose a filter to apply: ";
+				cin >> filterChoice;
+		
+				saveUndoImage(image);
+				canUndo = true;
+				switch (filterChoice) {
+				case 1:
+					grayscale(image);
+					break;
+				case 2:
+					black_white(image);
+					break;
+				case 3:
+					invertImage(image);
+					break;
+				case 5:
+					image_flip(image);
+					break;
+				case 6:
+					rotate_image(image);
+					break;
+				case 7:
+					adjustBrightness(image);
+					break;
+				case 8:
+					resize_image(filename, image);
+					break;
+				case 10:
+					Detect_Image_edges(filename, image);
+					break;
+				case 11:
+					cropImage(image);
+					break;
+				case 12:
+					Infrared_filter(image);
+					break;
+				case 14:
+					Apply_TV_Effect(filename, image);
+					break;
+				case 15:
+					purpleTint(image);
+					break;
+				case 16:
+					merge_image(image1, image2);
+					break;
+				case 17:
+					sunlight(image);
+					break;
+				default:
+					cout << "Invalid filter choice. Please try again.\n";
+					canUndo = false;
+	            }
+				break;
+			case 2:
+				uploadImage(filename, image);
+				canUndo = false;
+				break;
+			case 3:
+				image_save(filename, image);
+				canUndo = false;
+				break;
+			case 4:
+				if (canUndo) {
+					image.loadImage("undo_temp.png");
+					cout << "Undo successful. Reverted to the previous image state.\n";
+					canUndo = false;
+				}
+				else {
+					cout << "No filter has been applied yet. Cannot undo.\n";
+				}
+				break;
+			case 5:
+				exit_editing();
+				cont_editing = false;
+				break;
+			default:
+				cout << "Invalid option. Please try again.\n";
 
-    while (cont_editing) {
-        cout << "\nSelect the number of what you would like to do:\n"
-            << " 0- Load a new image\n"
-            << " 1- Convert to Grayscale\n"
-            << " 2- Convert to Black and White\n"
-            << " 3- Invert Image colors\n"
-            << " 5- Flip Image\n"
-            << " 6- Rotate Image\n"
-            << " 7- Adjust Brightness\n"
-            << " 8- Resize the image\n"
-            << " 10_ Detect_Image_edges\n"
-            << " 11_ crop the image\n"
-            << " 12- Apply Infrared filter\n"
-            << " 14_ Apply_TV_Effect\n"
-            << " 15_ apply purple-tint\n"
-            << " 16_ apply Merge images\n"
-            << " 17_ apply Sunlight\n"
-            << " 19- Save the image\n"
-            << " 20- Exit\n";
-
-        cin >> choice;
-        cin.ignore();
-
-        switch (choice) {
-        case 0:
-            load_image(filename, image);
-            break;
-        case 1:
-            grayscale(image);
-            break;
-        case 2:
-            black_white(image);
-            break;
-        case 3:
-            invertImage(image);
-            break;
-        case 5:
-            image_flip(image);
-            break;
-        case 6:
-            rotate_image(image);
-            break;
-        case 7: {
-            adjustBrightness(image);
-            break;
-        }
-        case 8:
-            resize_image(filename, image);
-            break;
-        case :
-            Detect_Image_edges(filename, image);
-            break;
-        case 11:
-            cropImage(image);
-            break;
-        case 12:
-            Infrared_filter(image);
-            break;
-        case 14:
-            Apply_TV_Effect(filename, image);
-            break;
-        case 15:
-            purpleTint(image);
-   break;
-        case 16 :
-            merge images (image);
-    break; 
-        case 17 :
-            Sunlight(Image& image)
-    break;
-        case 19:
-            image_save(filename, image);
-            break;
-        case 20:
-            exit_editing();
-            cont_editing = false;
-            break;
-        default:
-            cout << "Invalid number. Please pick again.\n";
-        }
-    }
-
-    return 0;
+	}
 }
+
+int clampColor(float value) {
+    if (value < 0.0) return 0;
+    if (value > 255.0) return 255;
+    return static_cast<int>(value);
+}
+
+
+
+
+
+
 
 
 // This function is used to ask the user to upload an image
