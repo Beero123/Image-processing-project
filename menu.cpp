@@ -40,6 +40,7 @@ void Infrared_filter(Image& image);
 void purpleTint(Image& image);
 void merge_image(Image& image1,Image& image2);
 void Sunlight(Image& image);
+void unapply_filter(Image& image, Image& old_image);
 
 
 
@@ -167,7 +168,7 @@ void image_save(string& filename, Image& image) {
 
 // This function removes the latest filter the user has applied from the picture
 
-void unapply_filter (Image& image, Image old_image){
+void unapply_filter (Image& image, Image& old_image){
         image = old_image;
         cout << "your latest filter has been removed successfully";
 
