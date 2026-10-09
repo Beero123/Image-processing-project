@@ -157,13 +157,22 @@ void load_image(string& filename, Image& image) {
 // This function is used to save an image
 
 void image_save(string& filename, Image& image) {
-
-    cout << "Pls enter image name to store new image\n";
+    cout << "Enter image name with extension: ";
     getline(cin >> ws, filename);
-    
-    image.saveImage(filename);
 
-    cout << "Your image has been saved successfully.\n";
+    if (filename.find(".jpg") != string::npos ||
+        filename.find(".png") != string::npos ||
+        filename.find(".bmp") != string::npos ||
+        filename.find(".jpeg") != string::npos ||
+        filename.find(".hdr") != string::npos)
+    {
+        image.saveImage(filename);
+        cout << "Image saved successfully!\n";
+    }
+    else
+    {
+        cout << "Invalid extension!\n";
+    }
 }
 
 // This function removes the latest filter the user has applied from the picture
