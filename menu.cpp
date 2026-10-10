@@ -480,6 +480,7 @@ int main() {
             }
 
         }
+        cout << "your image got inverted \n";
     }
 
     void adjustBrightness(Image & image) {
@@ -502,6 +503,7 @@ int main() {
                 }
             }
         }
+        cout << "Brightness adjusted successfully." << endl;
     }
 
     void cropImage(Image & image) {
@@ -554,7 +556,7 @@ int main() {
                 image(i, j, 2) = clampColor(new_B);
             }
         }
-
+        cout<<"your image got purple tint\n";
     }
 
 
@@ -608,6 +610,7 @@ int main() {
     // This function is used to apply fliter 9, Merge images
 
     void merge_image(Image & image, Image & image1) {
+        
         int width1 = image.width;
         int height1 = image.height;
         int width2 = image1.width;
