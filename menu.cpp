@@ -613,81 +613,114 @@ void Infrared_filter(Image& image) {
     cout << "Your Infrared filter got applied.\n";
 }
 // This function is used to apply fliter 9, Merge images
+Image resize_for_merge(Image image, int new_width, int new_height)
+{
+    Image resized_image(new_width, new_height);
 
-void merge_image(Image& image, Image& image1) {
-    int width1 = image.width;
-    int height1 = image.height;
-    int width2 = image1.width;
-    int height2 = image1.height;
+    for (int i = 0; i < new_height; i++)
+    {
+        for (int j = 0; j < new_width; j++)
+        {
+            for (int k = 0; k < image.channels; k++)
+            {
+                int x = j * image.width / new_width;
+                int y = i * image.height / new_height;
 
-    if (width1 == width2 && height1 == height2) {
-        Image mergedImage(width1, height1);
-
-        for (int i = 0; i < width1; i++) {
-            for (int j = 0; j < height1; j++) {
-                for (int k = 0; k < image.channels; k++) {
-                    mergedImage(i, j, k) = (image(i, j, k) + image1(i, j, k)) / 2;
-                }
+                resized_image(j, i, k) = image(x, y, k);
             }
         }
     }
-    else {
-        cout << "Images have different sizes." << endl;
-        cout << "1 - Resize both images to the same size" << endl;
-        cout << "2 - Merge the common area" << endl;
+
+    return resized_image;
+}
+
+
+void merge_image(Image& image, Image& image1)
+{
+    int width, height;
+
+    if (image.width == image1.width &&
+        image.height == image1.height)
+    {
+        width = image.width;
+        height = image.height;
+
+        cout << "Images have the same size." << endl;
+        cout << "Merging images..." << endl;
+    }
+    else
+    {
+        cout << "1- Resize both images to the same size and merge" << endl;
+        cout << "2- Merge the common area only" << endl;
+
         int option;
         cin >> option;
 
-        if (option == 1) {
-            int newWidth = max(width1, width2);
-            int newHeight = max(height1, height2);
+        if (option == 1)
+        {
+            width = max(image.width, image1.width);
+            height = max(image.height, image1.height);
 
-            Image mergedImage(newWidth, newHeight);
-            for (int i = 0; i < newHeight; i++) {
-                for (int j = 0; j < newWidth; j++) {
-                    for (int k = 0; k < image.channels; k++) {
-                        mergedImage(i, j, k) = (image(i, j, k) + image1(i, j, k)) / 2;
-                    }
-                }
-            }
+            image = resize_for_merge(image, width, height);
+            image1 = resize_for_merge(image1, width, height);
         }
-        else if (option == 2) {
-            int minWidth = min(width1, width2);
-            int minHeight = min(height1, height2);
-
-            Image mergedImage(minWidth, minHeight);
-            for (int i = 0; i < minHeight; i++) {
-                for (int j = 0; j < minWidth; j++) {
-                    for (int k = 0; k < image.channels; k++) {
-                        mergedImage(i, j, k) = (image(i, j, k) + image1(i, j, k)) / 2;
-                    }
-                }
-            }
+        else if (option == 2)
+        {
+            width = min(image.width, image1.width);
+            height = min(image.height, image1.height);
         }
-        cout << "Images  got merged successfully\n";
+        else
+        {
+            cout << "Wrong option!" << endl;
+            return;
+        }
     }
+
+    Image mergedImage(width, height);
+
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            for (int k = 0; k < image.channels; k++)
+            {
+                mergedImage(j, i, k) =
+                    (image(j, i, k) + image1(j, i, k)) / 2;
+            }
+        }
+    }
+
+    string filename;
+
+    cout << "Enter output image name with extension: ";
+    cin >> filename;
+
+    mergedImage.saveImage(filename);
+
+    cout << "Merge completed!" << endl;
 }
+
     // This function is used to apply sunlight filter
 void Sunlight(Image & image) {
-    for (int i = 0; i < image.height; i++) {
-        for (int j = 0; j < image.width; j++) {
-            int red = image(j, i, 0) + 50;
-            if (red > 255) {
-                red = 255;
-            }
-            image(j, i, 0) = red;
-            int green = image(j, i, 1) + 40;
-            if (green > 255) {
-                green = 255;
-            }
-            image(j, i, 1) = green;
-            int blue = image(j, i, 2) - 20;
-            if (blue < 0) {
-                blue = 0;
-            }
+        for (int i = 0; i < image.height; i++) {
+            for (int j = 0; j < image.width; j++) {
+                int red = image(j, i, 0) + 50;
+                if (red > 255) {
+                    red = 255;
+                }
+                image(j, i, 0) = red;
+                int green = image(j, i, 1) + 40;
+                if (green > 255) {
+                    green = 255;
+                }
+                image(j, i, 1) = green;
+                int blue = image(j, i, 2) - 20;
+                if (blue < 0) {
+                    blue = 0;
+                }
 
-           image(j, i, 2) = blue;
-    cout << "Sunlight filter got applied\n"; 
+                image(j, i, 2) = blue;
+                cout << "Sunlight filter got applied\n";
+            }
         }
-    }  
-}
+    }
