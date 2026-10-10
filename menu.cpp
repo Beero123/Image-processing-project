@@ -626,7 +626,7 @@ int main() {
                     for (int k = 0; k < image1.channels; k++)
                     {
                         mergedImage(j, i, k) =
-                            (image1(j, i, k) + image1(j, i, k)) / 2;
+                            (image(j, i, k) + image1(j, i, k)) / 2;
                     }
                 }
             }
@@ -644,8 +644,8 @@ int main() {
             {
                 int newWidth = max(width1, width2);
                 int newHeight = max(height1, height2);
+                Image resizedImage(newWidth, newHeight);
                 Image resizedImage1(newWidth, newHeight);
-                Image resizedImage2(newWidth, newHeight);
                 // Resize image 1
                 for (int i = 0; i < newHeight; i++)
                 {
@@ -660,7 +660,7 @@ int main() {
                         }
                     }
                 }
-                // Resize image 2
+                // Resize image 1
                 for (int i = 0; i < newHeight; i++)
                 {
                     for (int j = 0; j < newWidth; j++)
@@ -669,8 +669,8 @@ int main() {
                         {
                             int x = j * width2 / newWidth;
                             int y = i * height2 / newHeight;
-                            resizedImage2(j, i, k) =
-                                image1(x, y, k);
+                            resizedImage1(j, i, k) =
+                                image(x, y, k);
                         }
                     }
                 }
@@ -683,8 +683,8 @@ int main() {
                         for (int k = 0; k < image1.channels; k++)
                         {
                             mergedImage(j, i, k) =
-                                (resizedImage1(j, i, k) +
-                                    resizedImage2(j, i, k)) / 2;
+                                (resizedImage(j, i, k) +
+                                    resizedImage1(j, i, k)) / 2;
                         }
                     }
                 }
