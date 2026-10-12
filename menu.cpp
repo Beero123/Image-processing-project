@@ -134,6 +134,8 @@ int main() {
                 resize_image(filename, image, new_width, new_height);
                 break;
             case 9:
+                cout << "enter the second image: \n";
+                load_image(filename, image1);
                 merge_image(image, image1);
                 break;
             case 10:
