@@ -10,7 +10,7 @@
 
 
 #define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
+#include <iostream> 
 #include <cstdlib>
 #include <cmath>
 #include <string>
@@ -121,10 +121,10 @@ int main() {
             purpleTint(image);
    break;
         case 16 :
-            merge images (image);
+            merge_ image (image);
     break; 
         case 17 :
-            Sunlight(Image& image)
+            Sunlight( image)
     break;
         case 19:
             image_save(filename, image);
@@ -585,11 +585,11 @@ void Infrared_filter(Image& image) {
     
     // This function is used to apply fliter 9, Merge images
     
-    void merge_image(Image& image1, Image& image2))
-    int width1 = image1.width;
-    int height1 = image1.height;
-    int width2 = image2.width;
-    int height2 = image2.height;
+    void merge_image(Image& image, Image& image1))
+    int width1 = image.width;
+    int height1 = image.height;
+    int width2 = image1.width;
+    int height2 = image1.height;
     // If the two images have the same size
     if (width1 == width2 && height1 == height2)
     {
@@ -601,11 +601,10 @@ void Infrared_filter(Image& image) {
                 for (int k = 0; k < image1.channels; k++)
                 {
                     mergedImage(j, i, k) =
-                        (image1(j, i, k) + image2(j, i, k)) / 2;
+                        (image(j, i, k) + image1(j, i, k)) / 2;
                 }
             }
         }
-        mergedImage.save("merged_image.jpg");
     }
     // If the images have different sizes
     else
@@ -629,10 +628,7 @@ void Infrared_filter(Image& image) {
                 {
                     for (int k = 0; k < image1.channels; k++)
                     {
-                        int x = j * width1 / newWidth;
-                        int y = i * height1 / newHeight;
-                        resizedImage1(j, i, k) =
-                            image1(x, y, k);
+                        mergedImage(j, i, k)=(image(j, i, k) + image1(j, i, k)) / 2;
                     }
                 }
             }
@@ -641,7 +637,7 @@ void Infrared_filter(Image& image) {
             {
                 for (int j = 0; j < newWidth; j++)
                 {
-                    for (int k = 0; k < image2.channels; k++)
+                    for (int k = 0; k < image1.channels; k++)
                     {
                         int x = j * width2 / newWidth;
                         int y = i * height2 / newHeight;
