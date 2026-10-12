@@ -5,6 +5,7 @@
 //Majd Abdalla Mohamed Omer : 20253013  ||| filter: 2, 6, 10, 14
 //Rahaf Mohamed Elnaiem Mohamed : 20253040 |||| filter: 3, 7, 11, 15
 //Widad Amir Abdalkhalig Abbas: 20253076 |||| filter: 4, 8, 12, 16
+//https://drive.google.com/drive/folders/1if-BmUbxuJGCteVP8jQ6ugEBET79xDX8
 //section: S31, 32
 //===================================================================================
 //===================================================================================
@@ -134,6 +135,11 @@ int main() {
                 resize_image(filename, image, new_width, new_height);
                 break;
             case 9:
+<<<<<<< HEAD
+=======
+                cout << "enter the second image: \n";
+                load_image(filename, image1);
+>>>>>>> 49a0ebdc237c6f500c7933b642a486188129b680
                 merge_image(image, image1);
                 break;
             case 10:
@@ -1111,4 +1117,8 @@ void ApplyOilPaint(Image& image) {
 
     image = tempImage;
     cout << "Oil Paint filter applied successfully!" << endl;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 49a0ebdc237c6f500c7933b642a486188129b680
