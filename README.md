@@ -1,11 +1,15 @@
-  Cairo University - Faculty of Computing and AI
- CS213: Object-Oriented Programming
+  Cairo University - Faculty of Computers and AI
+  ---
+ CS213: Object-Oriented Programmin
+ ---
   Assignment #1 (2026 / 2027)
+  ---
 Instructor: Dr. Mohammad El-Ramly
+---
 
  Program Description:
 This project is a baby photoshop that allows users to apply different filters to images. The program supports 16 filters and 2 bonus filters.
- Team Membeer:
+ Team Member:
  ---
 Abrar Hussein Ibrahim Salih:20253011
 ---
