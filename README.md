@@ -8,8 +8,11 @@ This project is a baby photoshop that allows users to apply different filters to
  Team Membeer:
  ---
 Abrar Hussein Ibrahim Salih:20253011
+---
 Majd Abdalla Mohamed Omer:20253013
+---
 Rahaf Mohamed Elnaiem Mohamed:20253040
+---
 Widad Amir Abdalkhalig Abbas:20253076
 ---
   Available Filters
