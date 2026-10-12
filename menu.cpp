@@ -6,6 +6,8 @@
 //Rahaf Mohamed Elnaiem Mohamed : 20253040 |||| filter: 3, 7, 11, 15
 //Widad Amir Abdalkhalig Abbas: 20253076 |||| filter: 4, 8, 12, 16
 //https://drive.google.com/drive/folders/1if-BmUbxuJGCteVP8jQ6ugEBET79xDX8
+//https://docs.google.com/document/d/1Ijy6GZ0lmCj-h879UZb9I-9vFv_xY8tU/edit?usp=drivesdk&ouid=116082081085320665086&rtpof=true&sd=true
+//https://github.com/Beero123/Image-processing-project.git
 //section: S31, 32
 //===================================================================================
 //===================================================================================
