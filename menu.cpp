@@ -1,4 +1,4 @@
-
+// https://docs.google.com/document/d/1Ijy6GZ0lmCj-h879UZb9I-9vFv_xY8tU/edit?usp=drivesdk&ouid=116082081085320665086&rtpof=true&sd=true
 //====================================================================================
 //======================================Part 2========================================
 //Abrar Hussein Ibrahim Salih : 20253011 |||| filter: 1, 5, 9, 13
@@ -6,8 +6,6 @@
 //Rahaf Mohamed Elnaiem Mohamed : 20253040 |||| filter: 3, 7, 11, 15
 //Widad Amir Abdalkhalig Abbas: 20253076 |||| filter: 4, 8, 12, 16
 //https://drive.google.com/drive/folders/1if-BmUbxuJGCteVP8jQ6ugEBET79xDX8
-//https://docs.google.com/document/d/1Ijy6GZ0lmCj-h879UZb9I-9vFv_xY8tU/edit?usp=drivesdk&ouid=116082081085320665086&rtpof=true&sd=true
-//https://github.com/Beero123/Image-processing-project.git
 //section: S31, 32
 //===================================================================================
 //===================================================================================
@@ -51,7 +49,7 @@ void blurr_filter(Image& image, string& filename);
 void apply_frame(Image& image);
 void applyOilPaint(Image& image);
 Image skew_horizontal(Image& src, float shear_factor);
-void ApplyOilPaint(Image&image);
+void ApplyOilPaint(Image& image);
 int clampColor(float value) {
 
     if (value < 0.0) return 0;
@@ -100,6 +98,7 @@ int main() {
             cout << "17- Skew the image\n";
             cout << "18- Oil Print\n";
             cout << "19- Infrared filter\n";
+            cout << "20_ Apply a frame\n";
             cout << "choose a filter to apply: ";
             cin >> filterChoice;
 
@@ -158,7 +157,11 @@ int main() {
                 purpleTint(image);
                 break;
             case 16:
-                merge_image(image,image1);
+                string filename2;
+                cout << "Enter the second image filename: ";
+                cin >> filename2;
+                image1.loadNewImage(filename2);
+                merge_image(image, image1);
                 break;
             case 17:
                 float precentage;
@@ -172,6 +175,9 @@ int main() {
                 break;
             case 19:
                 Infrared_filter(image);
+                break;
+            case 20:
+                apply_frame(image);
                 break;
             default:
                 cout << "Invalid filter choice. Please try again.\n";
@@ -890,7 +896,7 @@ void apply_frame(Image& image) {
                     image(i, j, 2) = 0;
                 }
             }
-
+            break;
         case 2:
             for (int i = 0; i < image.width; ++i) {
                 for (int j = 0; j < 20; ++j) {
@@ -924,7 +930,7 @@ void apply_frame(Image& image) {
                     image(i, j, 2) = 0;
                 }
             }
-
+            break;
         case 3:
             for (int i = 0; i < image.width; ++i) {
                 for (int j = 0; j < 20; ++j) {
@@ -1096,6 +1102,7 @@ void ApplyOilPaint(Image& image) {
             }
 
             int maxCount = 0;
+            
             int bestBin = 0;
             for (int i = 0; i < levels; i++) {
                 if (count[i] > maxCount) {
@@ -1114,8 +1121,5 @@ void ApplyOilPaint(Image& image) {
 
     image = tempImage;
     cout << "Oil Paint filter applied successfully!" << endl;
-<<<<<<< HEAD
+    <<<<<< < HEAD
 }
-=======
-}
->>>>>>> 49a0ebdc237c6f500c7933b642a486188129b680
