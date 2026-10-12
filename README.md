@@ -6,6 +6,7 @@ Instructor: Dr. Mohammad El-Ramly
  Program Description:
 This project is a baby photoshop that allows users to apply different filters to images. The program supports 16 filters and 2 bonus filters.
  Team Membeer:
+ ---
 Abrar Hussein Ibrahim Salih:20253011
 Majd Abdalla Mohamed Omer:20253013
 Rahaf Mohamed Elnaiem Mohamed:20253040
