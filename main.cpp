@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
@@ -44,6 +45,37 @@ void OilPaint(const unsigned char* inputImage, unsigned char* outputImage, int w
                     maxCount = count[i];
                     bestBin = i;
                 }
+=======
+#include <iostream>
+#include <string>
+#include "Image_Class.h"
+
+using namespace std;
+
+void image_save(string& filename, Image& image) {
+    cout << "Enter image name with extension: ";
+    getline(cin >> ws, filename);
+
+    if (filename.find(".jpg") != string::npos ||
+        filename.find(".png") != string::npos ||
+        filename.find(".bmp") != string::npos ||
+        filename.find(".jpeg") != string::npos)
+    {
+        image.saveImage(filename);
+        cout << "Image saved successfully!\n";
+    }
+    else
+    {
+        cout << "Invalid extension!\n";
+    }
+}
+
+void apply_invert_filter(Image& image) {
+    for (int i = 0; i < image.width; ++i) {
+        for (int j = 0; j < image.height; ++j) {
+            for (int k = 0; k < image.channels; ++k) {
+                image(i, j, k) = 255 - image(i, j, k);
+>>>>>>> Stashed changes
             }
 
             int outIdx = (y * width + x) * 3;
@@ -57,6 +89,7 @@ void OilPaint(const unsigned char* inputImage, unsigned char* outputImage, int w
 }
 
 int main() {
+<<<<<<< Updated upstream
     int width, height, channels;
     const char* filename = "luffy.jpg";
     unsigned char* imgData = stbi_load(filename, &width, &height, &channels, 3);
@@ -86,6 +119,17 @@ int main() {
     stbi_write_png(outputFilename, width, height, 3, outputImage.data(), width * 3);
 
     cout << "Success! Saved output as " << outputFilename << endl;
+=======
+    string filename;
+    cout << "Enter input image name: ";
+    cin >> filename;
+
+    Image image(filename);
+
+    apply_invert_filter(image);
+
+    image_save(filename, image);
+>>>>>>> Stashed changes
 
     return 0;
 }
