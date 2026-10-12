@@ -81,13 +81,15 @@ int main() {
             cout << "6- Rotate Image\n";
             cout << "7- Adjust Brightness\n";
             cout << "8- Resize Image\n";
+            cout << "9- Merge Images\n";
             cout << "10- Detect Edges\n";
             cout << "11- Crop Image\n";
-            cout << "12- Blurr FilterInfrared Filter\n";
+            cout << "12- Blurr Filter\n";
+            cout << "13- Sunlight Effect Filter\n";
             cout << "14- TV Effect Filter\n";
             cout << "15_ Purple Tint Filter\n";
-            cout << "16- Merge Images\n";
-            cout << "17- Sunlight Effect Filter\n";
+            cout << "16- Infrared filter\n";
+            cout << "17- Skew the image\n";
             cout << "choose a filter to apply: ";
             cin >> filterChoice;
 
