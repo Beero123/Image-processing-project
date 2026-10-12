@@ -94,11 +94,9 @@ int main() {
             cout << "13- Sunlight Effect Filter\n";
             cout << "14- TV Effect Filter\n";
             cout << "15_ Purple Tint Filter\n";
-            cout << "16- Merge Images\n";
+            cout << "16- Infrared filter\n";
             cout << "17- Skew the image\n";
             cout << "18- Oil Print\n";
-            cout << "19- Infrared filter\n";
-            cout << "20_ Apply a frame\n";
             cout << "choose a filter to apply: ";
             cin >> filterChoice;
 
@@ -136,6 +134,10 @@ int main() {
                 resize_image(filename, image, new_width, new_height);
                 break;
             case 9:
+                string filename2;
+                cout << "Enter the second image filename: ";
+                cin >> filename2;
+                image1.loadNewImage(filename2);
                 merge_image(image, image1);
                 break;
             case 10:
@@ -157,11 +159,7 @@ int main() {
                 purpleTint(image);
                 break;
             case 16:
-                string filename2;
-                cout << "Enter the second image filename: ";
-                cin >> filename2;
-                image1.loadNewImage(filename2);
-                merge_image(image, image1);
+                Infrared_filter(image);
                 break;
             case 17:
                 float precentage;
@@ -172,12 +170,6 @@ int main() {
                 break;
             case 18:
                 ApplyOilPaint(image);
-                break;
-            case 19:
-                Infrared_filter(image);
-                break;
-            case 20:
-                apply_frame(image);
                 break;
             default:
                 cout << "Invalid filter choice. Please try again.\n";
